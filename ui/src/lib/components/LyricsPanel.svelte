@@ -1,9 +1,9 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { fade, fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { beforeNavigate } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Maximize01Icon, Minimize01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Maximize01Icon, Minimize01Icon } from '$lib/icons';
 	import LyricsView from './LyricsView.svelte';
 	import { ui } from '$lib/player.svelte';
 	import { t } from '$lib/i18n.svelte';

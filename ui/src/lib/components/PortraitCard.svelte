@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// An artist as a poster, not a circle. A circular avatar crops the photo to a face and then sets
 	// the name in 12px underneath it, which is how every music app draws an artist and why none of
 	// them are memorable. A tall frame keeps the photograph, and the name goes on it, big, where the
@@ -6,8 +6,8 @@
 	//
 	// object-position sits above centre: press photos are shot with headroom, and a square-ish crop
 	// of the middle lands on a chest.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { UserIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { UserIcon } from '$lib/icons';
 	import type { BrowseItem } from '$lib/api';
 	import { thumb } from '$lib/thumb';
 	import { setDragItem } from '$lib/dnd';

@@ -14,7 +14,7 @@
 	// ponytail: drag is the only way to reorder (no keyboard equivalent). Add/remove/open all work
 	// from the keyboard; wire arrow-key moves onto the tiles if anyone actually needs it.
 	import { flip } from 'svelte/animate';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Cancel01Icon,
 		Add01Icon,
@@ -24,7 +24,7 @@
 		MusicNote01Icon,
 		UserIcon,
 		ListRestartIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import SectionHeading from './SectionHeading.svelte';
 	import ShortcutPicker from './ShortcutPicker.svelte';
 	import { ON_REPEAT_ID } from '$lib/api';
@@ -180,7 +180,7 @@
 							<div class="absolute -left-1 bottom-0 top-0 z-20 w-0.5 rounded-full bg-primary"></div>
 						{/if}
 						<div
-							class="flex h-16 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border bg-card/40 text-left transition-colors hover:border-foreground/20 hover:bg-card"
+							class="group flex h-16 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border bg-card/40 text-left transition-colors hover:border-foreground/20 hover:bg-card"
 							role="button"
 							tabindex="0"
 							draggable="true"
@@ -207,7 +207,7 @@
 									<img
 										src={thumb(item.thumbnail, 400)}
 										alt=""
-										class="h-full w-full object-cover"
+										class="cover-scale h-full w-full object-cover"
 										loading="lazy"
 										draggable="false"
 										onerror={() => (failed = { ...failed, [item.thumbnail!]: true })}

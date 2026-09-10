@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// One header for every section on home (and every shelf elsewhere), so the page reads as one
 	// document instead of a stack of unrelated widgets.
 	//
@@ -6,8 +6,8 @@
 	// section a measurable width and an end, which a bare <h2> floating over a row of cards never
 	// had. It fades out rather than reaching the edge — a hard line all the way across would read as
 	// a divider between sections, and these sit above their content, not between them.
-	import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/svelte';
-	import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon, type IconSvgElement } from '$lib/icons';
+	import { ArrowRight01Icon } from '$lib/icons';
 	import type { Snippet } from 'svelte';
 
 	let {

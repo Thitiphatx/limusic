@@ -1,4 +1,4 @@
-<script module lang="ts">
+﻿<script module lang="ts">
 	// Module scope, so returning to the library (back from an album you opened, or via the sidebar)
 	// keeps the tab you were on instead of snapping to All.
 	let lastTab = 'all';
@@ -7,7 +7,7 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte';
 	import { page } from '$app/state';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Add01Icon,
 		CloudSyncIcon,
@@ -18,7 +18,7 @@
 		Playlist02Icon,
 		SquareStackIcon,
 		UserSharingIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import * as Dialog from '$lib/components/ui/dialog';

@@ -1,8 +1,8 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The ⋯ menu on a sidebar library row, a card, or an artist row. Positioned `fixed` and moved to
 	// <body> like TrackMenu: the playlist list is a scroll container, so an absolute popup would be
 	// clipped by it. Right-clicking the surrounding `[data-ctx]` element opens it at the pointer.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		MoreHorizontalIcon,
 		MoreVerticalIcon,
@@ -19,7 +19,7 @@
 		DashboardSquare02Icon,
 		Share08Icon,
 		UserBlock01Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import * as api from '$lib/api';
 	import type { BrowseItem } from '$lib/api';
 	import { enqueueItem, playItem } from '$lib/browse';

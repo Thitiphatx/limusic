@@ -1,12 +1,12 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The Shortcuts grid's "+" — pick from your library without hunting for a ⋯ menu. Stays open so
 	// several can go in at once; already-added rows show a tick instead of vanishing.
 	// ponytail: library only. Anything else in YouTube still gets there by dragging its card onto the
 	// grid, or ⋯ → Add to shortcuts — wire a search box in here if that turns out to be the common case.
 	import { fade, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Cancel01Icon, Tick02Icon, Add01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Cancel01Icon, Tick02Icon, Add01Icon } from '$lib/icons';
 	import { thumb } from '$lib/thumb';
 	import { addPick, library, loadLibrary, personal } from '$lib/player.svelte';
 	import { mergeSaved } from '$lib/personal';

@@ -3,8 +3,8 @@
 	// play / add-to-playlist. Wider than a MediaCard, so the shelf stretches these instead of
 	// packing more of them per row (see Shelf's `community` prop).
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { PlayIcon, PlayListAddIcon, MusicNote01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { PlayIcon, PlayListAddIcon, MusicNote01Icon } from '$lib/icons';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import * as api from '$lib/api';
 	import type { BrowseItem, PlaylistPage } from '$lib/api';
@@ -116,7 +116,7 @@
 			class="relative mx-auto aspect-square w-full max-w-44 overflow-hidden rounded-xl bg-muted"
 		>
 			{#if mosaic.length === 4}
-				<div class="grid h-full w-full grid-cols-2 grid-rows-2">
+				<div class="grid h-full w-full grid-cols-2 grid-rows-2 transition-transform duration-300 ease-out group-hover:scale-105">
 					{#each mosaic as m (m)}
 						<img src={thumb(m, 200)} alt="" class="h-full w-full object-cover" loading="lazy" />
 					{/each}

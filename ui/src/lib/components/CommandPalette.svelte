@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// Ctrl+K search, without leaving the page you're on. Runs the same debounced `search_all` preview
 	// the search field runs (`searchPreview`, same page-cache key), so the two show the same rows and
 	// a query previewed here doesn't get searched again when you open the full results.
@@ -7,8 +7,8 @@
 	// the raw query locally would hide results whose title doesn't contain what you typed.
 	// vimBindings={false}: those bind ctrl+k to "move up", which is the key that opens this.
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Search01Icon, MusicNote01Icon, UserIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Search01Icon, MusicNote01Icon, UserIcon } from '$lib/icons';
 	import * as Command from '$lib/components/ui/command/index.js';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import ExplicitIcon from './ExplicitIcon.svelte';

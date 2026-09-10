@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { scale } from 'svelte/transition';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Home01Icon,
 		Search01Icon,
@@ -15,7 +15,7 @@
 		ListRestartIcon,
 		SquareArrowLeft01Icon,
 		SquareArrowRight01Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { toggleMode } from 'mode-watcher';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
@@ -23,6 +23,8 @@
 	import { ON_REPEAT_ID, type BrowseItem } from '$lib/api';
 	import { thumb } from '$lib/thumb';
 	import PlaylistMenu from './PlaylistMenu.svelte';
+	import { appIcon } from '$lib/appicon.svelte';
+	import { branding } from '$lib/branding.svelte';
 	import {
 		auth,
 		library,
@@ -104,7 +106,18 @@
 	)}"
 >
 	<div class="flex items-center justify-center px-2 py-2 {wide('lg:justify-between')}">
-		<span class="hidden font-heading text-lg font-bold tracking-tight {wide('lg:block')}">Limusic</span>
+		<div class="flex items-center gap-2.5 overflow-hidden">
+			{#if branding.showLogo}
+				<img
+					src={branding.logo || appIcon.src}
+					alt=""
+					class="size-6 shrink-0 rounded object-contain"
+				/>
+			{/if}
+			<span class="hidden truncate font-heading text-lg font-bold tracking-tight {wide('lg:block')}">
+				{branding.name}
+			</span>
+		</div>
 		<!-- Column when collapsed: the two buttons don't fit side by side in the 64px rail. -->
 		<div class="flex items-center gap-1 {collapsed ? 'flex-col' : ''}">
 			<Button

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/svelte';
+	import { HugeiconsIcon, type IconSvgElement } from '$lib/icons';
 	import {
 		FavouriteIcon,
 		MusicNote01Icon,
@@ -7,7 +7,7 @@
 		PlayListAddIcon,
 		ThumbsDownIcon,
 		ThumbsUpIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import * as api from '$lib/api';
 	import type { SongItem } from '$lib/api';
 	import { thumb } from '$lib/thumb';
@@ -152,7 +152,9 @@
 			{/if}
 			{#if !hideThumb}
 				{#if song.thumbnail}
-					<img src={thumb(song.thumbnail, 96)} alt="" class="h-10 w-10 shrink-0 rounded-md object-cover" loading="lazy" />
+					<div class="h-10 w-10 shrink-0 overflow-hidden rounded-md">
+						<img src={thumb(song.thumbnail, 96)} alt="" class="cover-scale h-full w-full object-cover" loading="lazy" />
+					</div>
 				{:else}
 					<!-- An untagged file has no artwork of its own. A music note keeps the row aligned
 					     with its neighbours and says so plainly. -->

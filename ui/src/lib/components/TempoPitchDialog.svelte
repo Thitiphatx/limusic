@@ -1,15 +1,15 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// "Advanced": tempo and pitch for what's playing, from the player bar's ⋮ menu. Both apply on
 	// every step (no Apply button), and neither is persisted: mpv comes up at 1.00x / 0 on every
 	// launch, so `playback` holding them is the whole state.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		AudioWave02Icon,
 		FastForwardIcon,
 		MinusSignIcon,
 		PlusSignIcon
-	} from '@hugeicons/core-free-icons';
-	import type { IconSvgElement } from '@hugeicons/svelte';
+	} from '$lib/icons';
+	import type { IconSvgElement } from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { inRoom } from '$lib/lt.svelte';

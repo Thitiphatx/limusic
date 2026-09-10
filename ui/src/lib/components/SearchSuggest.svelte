@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The search field plus its typeahead preview: type, wait 500ms, get a handful of real results
 	// under the input. Runs the same `search_all` the search page runs and writes the same page-cache
 	// key, so submitting a previewed query paints from cache instead of searching twice.
@@ -6,8 +6,8 @@
 	// Must live inside a <form>: Enter with nothing highlighted, and the "All results" row, fall
 	// through to that form's onsubmit, which is where each caller decides what a full search means
 	// (run it in place, or navigate to /search).
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Search01Icon, MusicNote01Icon, UserIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Search01Icon, MusicNote01Icon, UserIcon } from '$lib/icons';
 	import { Input } from '$lib/components/ui/input';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import ExplicitIcon from './ExplicitIcon.svelte';

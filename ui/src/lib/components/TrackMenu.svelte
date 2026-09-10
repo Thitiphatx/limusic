@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The ⋯ options menu shared by TrackRow (inline trigger) and MediaCard (overlay trigger).
 	// Right-clicking anywhere in the surrounding `[data-ctx]` element opens the same menu at the
 	// pointer (see `ctxHost`), which is what a track row's whole surface is for.
@@ -6,7 +6,7 @@
 	// them. The popup is `fixed`, anchored at the trigger and moved to <body> (`toBody`), so no
 	// scroll container clips it and no contained ancestor becomes its containing block.
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		MoreHorizontalIcon,
 		MoreVerticalIcon,
@@ -25,7 +25,7 @@
 		DashboardSquare02Icon,
 		Share08Icon,
 		PreferenceVerticalIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import * as api from '$lib/api';
 	import type { SongItem } from '$lib/api';
 	import { anchorMenu, ctxHost, fitMenu, NO_ANCHOR, toBody } from '$lib/menu';

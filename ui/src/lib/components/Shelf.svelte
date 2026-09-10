@@ -15,7 +15,7 @@
 	//
 	// The rail, its arrows, the edge fades and the content-visibility budget are shared by all of
 	// them; only the slot changes.
-	import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/svelte';
+	import { HugeiconsIcon, type IconSvgElement } from '$lib/icons';
 	import {
 		ArrowLeft01Icon,
 		ArrowRight01Icon,
@@ -23,7 +23,7 @@
 		MusicNote01Icon,
 		PlayListIcon,
 		UserMultiple02Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import MediaCard from './MediaCard.svelte';
 	import CommunityCard from './CommunityCard.svelte';
 	import PortraitCard from './PortraitCard.svelte';
@@ -35,6 +35,7 @@
 	import { asSong } from '$lib/browse';
 	import { openAddToPlaylist, openPlayer, playSong, playback } from '$lib/player.svelte';
 	import { t } from '$lib/i18n.svelte';
+	import { grabScroll } from '$lib/grabScroll';
 
 	let {
 		title,
@@ -168,13 +169,14 @@
 	     An attachment rather than onpointerenter: the handler doesn't make this div interactive. -->
 	<div class="group/shelf relative" {@attach measureOnEnter}>
 		<div
-			class="flex snap-x overflow-x-auto pb-2 {mode === 'song'
+			class="flex overflow-x-auto pb-2 {mode === 'song'
 				? 'gap-0'
 				: community
 					? 'gap-3'
 					: 'gap-2'}"
 			bind:this={row}
 			onscroll={update}
+			{@attach grabScroll}
 		>
 			{#if mode === 'song'}
 				{#each others as item (item.id)}

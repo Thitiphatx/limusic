@@ -1,8 +1,8 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { fade, fly, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { beforeNavigate } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Maximize01Icon,
 		Minimize01Icon,
@@ -15,7 +15,7 @@
 		VideoOffIcon,
 		VolumeHighIcon,
 		VolumeMute02Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import * as api from '$lib/api';
 	import { np, playback, ui, wheelVolume } from '$lib/player.svelte';

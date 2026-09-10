@@ -7,7 +7,7 @@
 	// The window is undecorated and transparent, so this component *is* the window: it paints the
 	// rounded card, and `data-tauri-drag-region="deep"` makes every part of it a drag handle
 	// except the controls (Tauri's drag script stops at buttons and inputs on its own).
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		PreviousIcon,
 		NextIcon,
@@ -22,7 +22,7 @@
 		Mic01Icon,
 		VolumeHighIcon,
 		VolumeMute02Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { fade } from 'svelte/transition';
 	import * as api from '$lib/api';
 	import {
@@ -294,13 +294,13 @@
 				<HugeiconsIcon icon={ShuffleIcon} class="h-4 w-4" />
 			</button>
 			<button
-				class="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/80"
+				class="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full !bg-white !text-black shadow-sm transition-transform duration-150 hover:!bg-white/90 hover:scale-105 active:scale-95"
 				onclick={() => api.togglePause()}
 				aria-label={playback.paused ? t('player.play') : t('player.pause')}
 			>
 				<!-- HugeiconsIcon freezes `icon` at mount, so the swap has to go through
 				     altIcon/showAlt — a ternary on `icon` would never repaint. -->
-				<HugeiconsIcon icon={PauseIcon} altIcon={PlayIcon} showAlt={playback.paused} class="h-4 w-4" />
+				<HugeiconsIcon icon={PauseIcon} altIcon={PlayIcon} showAlt={playback.paused} class="h-4 w-4 !text-black" />
 			</button>
 			<button
 				class="{panelBtn} {repeat !== 'off' ? 'text-primary' : 'text-muted-foreground'}"

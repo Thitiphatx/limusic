@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		PlayIcon,
 		MusicNote01Icon,
 		UserIcon,
 		ListRestartIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { ON_REPEAT_ID } from '$lib/api';
 	import type { BrowseItem } from '$lib/api';
 	import { thumb } from '$lib/thumb';
@@ -63,7 +63,7 @@
 <div class="group relative flex w-full flex-col gap-2" data-ctx>
 	<!-- draggable: every card is a drag source for home's Shortcuts grid (the only drop target). -->
 	<div
-		class="flex flex-col text-left transition-colors hover:bg-accent/10 {compact
+		class="group flex flex-col text-left transition-colors hover:bg-accent/10 {compact
 			? 'gap-1.5 rounded-lg p-1.5'
 			: 'gap-2 rounded-xl p-2'}"
 		role="button"
@@ -108,7 +108,7 @@
 						{src}
 						{srcset}
 						alt=""
-						class="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+						class="cover-scale h-full w-full object-cover"
 						loading="lazy"
 						draggable="false"
 						onerror={imgFailed}

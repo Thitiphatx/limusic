@@ -1,4 +1,4 @@
-<script module lang="ts">
+﻿<script module lang="ts">
 	// Survives remounts (module scope), so coming back to /search — from a result you clicked, or
 	// from the sidebar — shows the last search instead of a blank page. The results themselves come
 	// back from the page cache, so the rerun paints instantly and just revalidates.
@@ -9,8 +9,8 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Search01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Search01Icon } from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import MediaCardSkeleton from '$lib/components/MediaCardSkeleton.svelte';

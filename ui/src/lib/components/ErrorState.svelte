@@ -1,6 +1,6 @@
-<script lang="ts">
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { RefreshIcon } from '@hugeicons/core-free-icons';
+﻿<script lang="ts">
+	import { HugeiconsIcon } from '$lib/icons';
+	import { RefreshIcon } from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 
 	let { message, onRetry }: { message: string; onRetry: () => void } = $props();

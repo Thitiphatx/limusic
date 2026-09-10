@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { untrack, type Snippet } from 'svelte';
+	import { onMount, untrack, type Snippet } from 'svelte';
 	import { open, save } from '@tauri-apps/plugin-dialog';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Cancel01Icon,
 		Settings02Icon,
@@ -12,8 +12,9 @@
 		KeyboardIcon,
 		Cancel01Icon as RemoveIcon,
 		Copy01Icon,
-		Coffee02Icon
-	} from '@hugeicons/core-free-icons';
+		Coffee02Icon,
+		Loading03Icon
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Switch } from '$lib/components/ui/switch';
@@ -24,7 +25,8 @@
 	import { HELP_COMBO } from '$lib/shortcuts';
 	import { copyText } from '$lib/clipboard';
 	import * as api from '$lib/api';
-	import { blocked, prefs, ui, toast, unblockArtist } from '$lib/player.svelte';
+	import { blocked, prefs, ui, toast, unblockArtist, playback } from '$lib/player.svelte';
+	import { lt } from '$lib/lt.svelte';
 	import { win } from '$lib/win.svelte';
 	import ColorPicker from '$lib/components/ColorPicker.svelte';
 	import Changelog from '$lib/components/Changelog.svelte';
@@ -58,8 +60,10 @@
 		openDownloadPage
 	} from '$lib/updater.svelte';
 	import { getVersion } from '@tauri-apps/api/app';
+	import { convertFileSrc } from '@tauri-apps/api/core';
 	import { t, setLocale, currentLocale, LOCALES, type LocaleId } from '$lib/i18n.svelte';
 	import { appIcon, chooseAppIcon } from '$lib/appicon.svelte';
+	import { branding, setAppName, setAppLogo, setShowLogo } from '$lib/branding.svelte';
 
 	type TabId = 'general' | 'themes' | 'playback' | 'data' | 'about';
 	const TABS = $derived<{ id: TabId; label: string; hint: string; icon: typeof Settings02Icon }[]>([
@@ -143,6 +147,38 @@
 		}
 	}
 
+	let logoFileInput: HTMLInputElement | null = $state(null);
+
+	async function pickNavbarLogo() {
+		try {
+			const picked = await open({
+				title: t('settings.themes.navbar_logo'),
+				filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg', 'webp', 'svg'] }]
+			});
+			if (typeof picked === 'string') {
+				const assetUrl = `${convertFileSrc(picked)}?v=${Date.now()}`;
+				setAppLogo(assetUrl);
+				toast.success(t('toasts.app_icon_set'));
+				return;
+			}
+		} catch {}
+		logoFileInput?.click();
+	}
+
+	function onLogoFilePicked(e: Event) {
+		const input = e.currentTarget as HTMLInputElement;
+		const file = input.files?.[0];
+		if (!file) return;
+		const reader = new FileReader();
+		reader.onload = () => {
+			if (typeof reader.result === 'string') {
+				setAppLogo(reader.result);
+				toast.success(t('toasts.app_icon_set'));
+			}
+		};
+		reader.readAsDataURL(file);
+	}
+
 	function chooseFont(key: FontKey, value: string) {
 		isCustomFont[key] = value === 'custom';
 		if (value === 'custom') fontName[key] = familyName(effective[key]);
@@ -197,6 +233,66 @@
 	// Result of the last "Check for updates" click — shown inline (a toast renders behind the modal).
 	let updateResult = $state<{ message: string; error: boolean } | null>(null);
 
+	// Last.fm connection state
+	let lastfmConnected = $state(false);
+	let lastfmUser = $state<string | null>(null);
+	let lastfmConnecting = $state(false);
+
+	onMount(() => {
+		api.lastfmStatus()
+			.then((s) => {
+				lastfmConnected = s.connected;
+				lastfmUser = s.username ?? null;
+			})
+			.catch(() => {});
+		const subLastfm = api.onLastfmState((s) => {
+			const wasConnecting = lastfmConnecting;
+			lastfmConnecting = false;
+			lastfmConnected = s.connected;
+			lastfmUser = s.username ?? null;
+			if (s.error) toast.error(s.error);
+			else if (s.connected) toast.success(t('integrations.lastfm_scrobbling_as', { user: s.username ?? '' }));
+			else if (!wasConnecting) toast.success(t('integrations.lastfm_disconnected'));
+		});
+		return () => {
+			subLastfm.then((u) => u());
+		};
+	});
+
+	async function handleLastfmAction() {
+		if (lastfmConnecting) {
+			api.lastfmDisconnect().catch(() => {});
+			return;
+		}
+		if (lastfmConnected) {
+			try {
+				await api.lastfmDisconnect();
+				lastfmConnected = false;
+				lastfmUser = null;
+				toast.success(t('integrations.lastfm_disconnected'));
+			} catch (e) {
+				toast.error(String(e));
+			}
+			return;
+		}
+		lastfmConnecting = true;
+		try {
+			await api.lastfmConnect();
+			toast(t('integrations.lastfm_approve_in_browser'));
+		} catch (err) {
+			lastfmConnecting = false;
+			toast.error(String(err));
+		}
+	}
+
+	const lastfmDesc = $derived(
+		lastfmConnecting
+			? t('integrations.lastfm_connecting')
+			: lastfmConnected
+				? t('integrations.lastfm_scrobbling_as', { user: lastfmUser ?? '' })
+				: t('settings.general.lastfm_hint')
+	);
+
 	// (Re)load whenever the modal opens, so it reflects the current persisted values. Also clear the
 	// stale update-check result so re-opening the modal doesn't show it until pressed again.
 	// untrack: this reads and writes theme state, and `registerFontFiles` can rewrite it again when
@@ -205,6 +301,12 @@
 		if (!ui.settingsOpen) return;
 		untrack(() => {
 			load();
+			api.lastfmStatus()
+				.then((s) => {
+					lastfmConnected = s.connected;
+					lastfmUser = s.username ?? null;
+				})
+				.catch(() => {});
 			updateResult = null;
 			pickerOpen = false;
 			readBack();
@@ -545,17 +647,48 @@
 							</div>
 						</section>
 						<section class={GROUP}>
+							<h3 class={LABEL}>{t('settings.sections.integrations')}</h3>
+							<div class={CARD}>
+								{@render row({
+									title: t('settings.general.discord_rpc'),
+									desc: t('settings.general.discord_rpc_hint'),
+									control: discordSwitch
+								})}
+								{@render row({
+									title: t('settings.general.lastfm'),
+									desc: lastfmDesc,
+									control: lastfmControl
+								})}
+							</div>
+						</section>
+						<section class={GROUP}>
+							<h3 class={LABEL}>{t('settings.sections.tools')}</h3>
+							<div class={CARD}>
+								{@render row({
+									title: t('settings.general.listen_together'),
+									desc: t('settings.general.listen_together_hint'),
+									badge: lt.role !== 'none' ? 'Active' : undefined,
+									control: listenTogetherButton
+								})}
+								{@render row({
+									title: t('settings.general.open_link'),
+									desc: t('settings.general.open_link_hint'),
+									control: openLinkButton
+								})}
+								{@render row({
+									title: t('settings.general.theater_mode'),
+									desc: t('settings.general.theater_mode_hint'),
+									control: theaterModeButton
+								})}
+							</div>
+						</section>
+						<section class={GROUP}>
 							<h3 class={LABEL}>{t('settings.sections.activity')}</h3>
 							<div class={CARD}>
 								{@render row({
 									title: t('player.history'),
 									desc: t('settings.playback.play_history_hint'),
 									control: historySwitch
-								})}
-								{@render row({
-									title: t('settings.general.discord_rpc'),
-									desc: t('settings.general.discord_rpc_hint'),
-									control: discordSwitch
 								})}
 							</div>
 						</section>
@@ -613,6 +746,21 @@
 									title: t('settings.themes.app_icon'),
 									desc: t('settings.themes.app_icon_hint'),
 									control: appIconButtons
+								})}
+								{@render row({
+									title: t('settings.themes.app_name'),
+									desc: t('settings.themes.app_name_hint'),
+									control: appNameInput
+								})}
+								{@render row({
+									title: t('settings.themes.navbar_logo'),
+									desc: t('settings.themes.navbar_logo_hint'),
+									control: navbarLogoButtons
+								})}
+								{@render row({
+									title: t('settings.themes.show_logo'),
+									desc: t('settings.themes.show_logo_hint'),
+									control: showLogoSwitch
 								})}
 							</div>
 						</section>
@@ -1064,6 +1212,51 @@
 	</div>
 {/snippet}
 
+{#snippet appNameInput()}
+	<div class="flex items-center gap-2">
+		<Input
+			value={branding.name}
+			oninput={(e) => setAppName(e.currentTarget.value)}
+			placeholder="Limusic"
+			class="w-40 text-sm"
+		/>
+		{#if branding.name !== 'Limusic'}
+			<Button variant="ghost" size="sm" onclick={() => setAppName('Limusic')}>
+				{t('common.reset')}
+			</Button>
+		{/if}
+	</div>
+{/snippet}
+
+{#snippet navbarLogoButtons()}
+	<div class="flex shrink-0 items-center gap-2">
+		<img
+			src={branding.logo || appIcon.src}
+			alt=""
+			class="size-7 rounded object-contain border bg-muted/40 p-0.5"
+		/>
+		<input
+			type="file"
+			accept="image/*"
+			bind:this={logoFileInput}
+			onchange={onLogoFilePicked}
+			class="hidden"
+		/>
+		<Button variant="outline" size="sm" onclick={pickNavbarLogo}>
+			{t('settings.themes.app_icon_pick')}
+		</Button>
+		{#if branding.logo}
+			<Button variant="ghost" size="sm" onclick={() => setAppLogo(null)}>
+				{t('common.reset')}
+			</Button>
+		{/if}
+	</div>
+{/snippet}
+
+{#snippet showLogoSwitch()}
+	<Switch checked={branding.showLogo} onCheckedChange={(v) => setShowLogo(v)} />
+{/snippet}
+
 {#snippet addFontButton()}
 	<Button variant="outline" size="sm" class="shrink-0" onclick={pickFontFiles}>{t('settings.themes.add_font')}</Button>
 {/snippet}
@@ -1251,4 +1444,61 @@
 
 {#snippet changelog()}
 	<Changelog current={version} />
+{/snippet}
+
+{#snippet lastfmControl()}
+	{#if lastfmConnecting}
+		<Button variant="outline" size="sm" onclick={handleLastfmAction}>
+			<HugeiconsIcon icon={Loading03Icon} class="mr-1.5 h-3.5 w-3.5 animate-spin" />
+			{t('common.cancel')}
+		</Button>
+	{:else if lastfmConnected}
+		<Button variant="destructive" size="sm" onclick={handleLastfmAction}>
+			{t('integrations.disconnect')}
+		</Button>
+	{:else}
+		<Button variant="outline" size="sm" onclick={handleLastfmAction}>
+			{t('common.connect')}
+		</Button>
+	{/if}
+{/snippet}
+
+{#snippet listenTogetherButton()}
+	<Button
+		variant="outline"
+		size="sm"
+		onclick={() => {
+			ui.settingsOpen = false;
+			ui.ltOpen = true;
+		}}
+	>
+		{t('common.open')}
+	</Button>
+{/snippet}
+
+{#snippet openLinkButton()}
+	<Button
+		variant="outline"
+		size="sm"
+		onclick={() => {
+			ui.settingsOpen = false;
+			ui.linkOpen = true;
+		}}
+	>
+		{t('common.open')}
+	</Button>
+{/snippet}
+
+{#snippet theaterModeButton()}
+	<Button
+		variant="outline"
+		size="sm"
+		disabled={!playback.now}
+		onclick={() => {
+			ui.settingsOpen = false;
+			ui.theaterOpen = true;
+		}}
+	>
+		{t('common.open')}
+	</Button>
 {/snippet}

@@ -735,6 +735,75 @@ input[type='range'].range:active::-webkit-slider-thumb {
 	transform: scale(1.25);
 }
 
+/* Interactive cursor pointers for all clickable elements */
+button:not(:disabled),
+[role='button']:not(:disabled):not([aria-disabled='true']),
+[type='button']:not(:disabled),
+[type='submit']:not(:disabled),
+[type='reset']:not(:disabled),
+a[href],
+summary,
+[role='tab']:not(:disabled):not([aria-disabled='true']),
+[role='menuitem']:not(:disabled):not([aria-disabled='true']),
+[role='option']:not(:disabled):not([aria-disabled='true']),
+[role='switch']:not(:disabled):not([aria-disabled='true']),
+[role='checkbox']:not(:disabled):not([aria-disabled='true']),
+[data-slot='button'],
+[data-slot='select-trigger'],
+[data-slot='select-item'],
+[data-slot='command-item'],
+[data-slot='command-link-item'],
+[data-slot='dropdown-menu-item'],
+[data-slot='menu-item'],
+[data-slot='slider-thumb'],
+input[type='range'],
+input[type='checkbox'],
+input[type='radio'] {
+	cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+	cursor: pointer;
+}
+
+/* Ensure backdrop overlay buttons used for dismiss keep default cursor */
+button.fixed.inset-0.cursor-default,
+button.absolute.inset-0.cursor-default,
+button[data-menu].fixed.inset-0 {
+	cursor: default;
+}
+
+button:disabled,
+[aria-disabled='true'],
+[data-disabled='true'],
+[data-disabled] {
+	cursor: not-allowed;
+}
+
+/* Horizontal grab-scroll containers */
+.grab-scroll {
+	cursor: grab;
+	touch-action: pan-y;
+	scroll-snap-type: none !important;
+}
+
+.grab-scroll > * {
+	cursor: grab;
+}
+
+.grab-scroll button,
+.grab-scroll [role='button'][data-action],
+.grab-scroll [data-slot='button'] {
+	cursor: pointer;
+}
+
+.grab-scroll.is-dragging,
+.grab-scroll.is-dragging * {
+	cursor: grabbing !important;
+	user-select: none !important;
+	-webkit-user-select: none !important;
+}
+
 /* Custom scrollbars everywhere (KI-5). WebKitGTK paints its *native* overlay
    scrollbars on a separate composited layer above all page content, so they
    float on top of modals/popovers regardless of z-index. Any ::-webkit-scrollbar
@@ -759,12 +828,39 @@ input[type='range'].range:active::-webkit-slider-thumb {
 	background: transparent;
 }
 
-/* Respect users who ask the OS to minimise motion. */
-@media (prefers-reduced-motion: reduce) {
-	*, *::before, *::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
+/* Smooth music cover hover scale */
+.cover-scale {
+	transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1) !important;
+	will-change: transform;
 }
+
+:hover > .cover-scale,
+.group:hover .cover-scale,
+.group\/row:hover .cover-scale,
+.group\/tile:hover .cover-scale,
+.cover-scale:hover {
+	transform: scale(1.08) !important;
+}
+
+/* Music playback control icons: filled instead of outline */
+.lucide-play,
+.lucide-play path,
+.lucide-play polygon,
+.lucide-pause,
+.lucide-pause rect,
+.lucide-skip-back,
+.lucide-skip-back path,
+.lucide-skip-forward,
+.lucide-skip-forward path,
+.lucide-rewind,
+.lucide-rewind path,
+.lucide-fast-forward,
+.lucide-fast-forward path {
+	fill: currentColor;
+}
+
+.lucide-circle-play > path {
+	fill: currentColor;
+}
+
+

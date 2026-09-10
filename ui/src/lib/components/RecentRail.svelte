@@ -7,14 +7,14 @@
 	// chose are elevated, the ones the app noticed for you are not. The caller drops anything that
 	// is already a shortcut before it gets here — otherwise this is the same eight items again in a
 	// different shape, which is exactly what it was.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		PlayIcon,
 		MusicNote01Icon,
 		UserIcon,
 		ListRestartIcon,
 		ArrowTurnBackwardIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import SectionHeading from './SectionHeading.svelte';
 	import { ON_REPEAT_ID } from '$lib/api';
 	import type { BrowseItem } from '$lib/api';
@@ -81,7 +81,7 @@
 						<img
 							src={thumb(item.thumbnail, 400)}
 							alt=""
-							class="h-full w-full object-cover"
+							class="cover-scale h-full w-full object-cover"
 							loading="lazy"
 							draggable="false"
 							onerror={() => (failed = { ...failed, [item.thumbnail!]: true })}

@@ -1,7 +1,7 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// "Forgotten favourites" is a pile of half-remembered songs, not a row of destinations — so it
 	// reads as a list you scan, in balanced columns, instead of a carousel you page through.
-	import { Clock01Icon } from '@hugeicons/core-free-icons';
+	import { Clock01Icon } from '$lib/icons';
 	import SectionHeading from './SectionHeading.svelte';
 	import TrackRow from './TrackRow.svelte';
 	import * as api from '$lib/api';

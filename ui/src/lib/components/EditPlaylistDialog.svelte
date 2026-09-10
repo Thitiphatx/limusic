@@ -1,12 +1,12 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// "Edit playlist" on a playlist you own: name, description, visibility and a cover of your own.
 	//
 	// The three text/visibility fields are one write, sent on Save and only for what actually
 	// changed. The cover applies the moment a file is picked: it is stored on this machine (so it
 	// draws instantly and offline) and uploaded to YouTube Music behind the picker.
 	import { open as pickFile } from '@tauri-apps/plugin-dialog';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { ImageAdd02Icon, Delete02Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { ImageAdd02Icon, Delete02Icon } from '$lib/icons';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';

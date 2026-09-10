@@ -1,11 +1,11 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// "Share": the YTM link for a song/album/playlist/artist, with the artwork and title so you can
 	// see what you're about to send. Opened from any ⋯ menu via `openShare`, mounted once in the
 	// layout like AddToPlaylist.
 	import { fade, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Cancel01Icon, Copy01Icon, Tick02Icon, Alert02Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Cancel01Icon, Copy01Icon, Tick02Icon, Alert02Icon } from '$lib/icons';
 	import * as api from '$lib/api';
 	import type { BrowseItem, PlaylistPage } from '$lib/api';
 	import { copyText } from '$lib/clipboard';

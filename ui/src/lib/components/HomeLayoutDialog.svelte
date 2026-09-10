@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// Arrange home: drag the sections into the order you want them, hide the ones you don't. Nothing
 	// is written until Save, so dismissing the modal any other way (Esc, the overlay, the ✕) throws
 	// the edit away — which is why the list below is a working copy and not `personal` itself.
@@ -6,14 +6,14 @@
 	// ponytail: drag is the only way to reorder, matching the Shortcuts grid. Hiding works from the
 	// keyboard; wire arrow-key moves onto the rows if anyone asks.
 	import { untrack } from 'svelte';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Cancel02Icon,
 		DragDropHorizontalIcon,
 		SaveIcon,
 		ViewIcon,
 		ViewOffSlashIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { dragScroll, SECTION_ROW_MIME } from '$lib/dnd';

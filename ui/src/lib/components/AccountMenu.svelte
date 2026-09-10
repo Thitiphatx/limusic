@@ -1,10 +1,10 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// Account control for the titlebar (context/15) — moved out of the sidebar so sign-in lives in the
 	// top bar. Its own component because Titlebar.svelte already uses a single shared mx/my/menuOpen
 	// for the Last.fm menu; a second menu in that file would fight over them.
 	// Multi-account: below the active account the menu lists the *other* saved Google accounts, one
 	// click each to switch to, plus Add account (Google's AddSession flow) and per-account removal.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		UserCircleIcon,
 		Logout01Icon,
@@ -12,7 +12,7 @@
 		Add01Icon,
 		Cancel01Icon,
 		UserMinus01Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import * as api from '$lib/api';

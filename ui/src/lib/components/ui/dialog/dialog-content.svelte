@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { Dialog as DialogPrimitive } from "bits-ui";
 	import DialogPortal from "./dialog-portal.svelte";
 	import type { Snippet } from "svelte";
@@ -6,8 +6,8 @@
 	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
 	import type { ComponentProps } from "svelte";
 	import { Button } from "$lib/components/ui/button/index.js";
-	import { HugeiconsIcon } from "@hugeicons/svelte"
-	import { Cancel01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons'
+	import { Cancel01Icon } from '$lib/icons';
 	import { t } from '$lib/i18n.svelte';
 
 	let {

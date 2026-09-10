@@ -1,8 +1,8 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Copy01Icon,
 		Logout01Icon,
@@ -12,7 +12,7 @@
 		Exchange01Icon,
 		CrownIcon,
 		RefreshIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import * as api from '$lib/api';
 	import { copyText } from '$lib/clipboard';
 	import { ui, toast } from '$lib/player.svelte';

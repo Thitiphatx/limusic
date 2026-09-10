@@ -93,15 +93,13 @@ YouTube Music client, and grew from there.
 
 ## Scrobbling & Discord
 
-Both live in the title bar, next to the window controls.
+Both live under **Settings (`Ctrl+,`) > Integrations**.
 
-- **Last.fm**: click the Last.fm mark, approve Limusic in the browser tab that
-  opens, and you're connected for good. Tracks scrobble at the halfway point (or
-  four minutes, whichever comes first), which is Last.fm's own rule. Click again
-  to see the account or disconnect.
-- **Discord**: click the Discord mark to toggle Rich Presence. Green dot means
-  it's live. The card shows the track, artist, album art, and a progress bar, and
-  it disappears when you pause.
+- **Last.fm**: Connect your account via browser authorization. Tracks scrobble at the halfway point (or
+  four minutes, whichever comes first), which is Last.fm's own rule. You can manage or disconnect anytime from Settings.
+- **Discord**: Toggle Rich Presence on or off. When active, the Discord card displays current track info, artist, album art, and live progress bar.
+
+For a complete breakdown of custom enhancements and UI changes in this build, see [IMPROVEMENTS.md](IMPROVEMENTS.md).
 
 Building from source? Last.fm needs your own API credentials, and they are not in
 the repo. Get a key at [last.fm/api/account/create](https://www.last.fm/api/account/create)

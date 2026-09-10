@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { ArrowUpBigIcon, MusicNote01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { ArrowUpBigIcon, MusicNote01Icon } from '$lib/icons';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import { Button } from '$lib/components/ui/button';
 	import MediaCardSkeleton from '$lib/components/MediaCardSkeleton.svelte';
@@ -28,6 +28,7 @@
 		toast
 	} from '$lib/player.svelte';
 	import { t } from '$lib/i18n.svelte';
+	import { grabScroll } from '$lib/grabScroll';
 	import {
 		arrangeSections,
 		freshen,
@@ -334,7 +335,7 @@
 	     thing WebKitGTK reliably chokes on. -->
 	{#if chips.length}
 		<div class="sticky top-0 z-20 border-b bg-background px-6 pt-2.5">
-			<div class="flex gap-2 overflow-x-auto pb-2">
+			<div class="flex gap-2 scroll-smooth overflow-x-auto pb-2" {@attach grabScroll}>
 				<!-- An explicit "All" is the way out of a filter. Clicking the active chip again also
 				     clears it, but nobody discovers that, and nothing else on screen says you're filtered. -->
 				<button onclick={() => load(null)} class={chipClass(!selected)}>{t('common.all')}</button>

@@ -19,7 +19,7 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { fade, fly, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		Cancel01Icon,
 		FavouriteIcon,
@@ -34,7 +34,7 @@
 		ShuffleIcon,
 		VolumeHighIcon,
 		VolumeMute02Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import * as api from '$lib/api';
 	import {
 		commitVolume,
@@ -530,7 +530,7 @@
 				</button>
 				<button
 					onclick={() => api.togglePause()}
-					class="mx-1 flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-150 hover:scale-[1.06] active:scale-95"
+					class="mx-1 flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full !bg-white !text-black shadow-lg transition-transform duration-150 hover:scale-[1.06] hover:!bg-white/90 active:scale-95"
 					aria-label={playback.paused ? t('player.play') : t('player.pause')}
 				>
 					<!-- icon swap via altIcon/showAlt: `icon` is frozen at mount -->
@@ -538,7 +538,7 @@
 						icon={PauseIcon}
 						altIcon={PlayIcon}
 						showAlt={playback.paused}
-						class="h-7 w-7"
+						class="h-7 w-7 !text-black"
 					/>
 				</button>
 				<button

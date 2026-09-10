@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/state";
     import { goto } from "$app/navigation";
-    import { HugeiconsIcon } from "@hugeicons/svelte";
+    import { HugeiconsIcon } from '$lib/icons';
     import {
         PlayIcon,
         MoreVerticalIcon,
@@ -14,7 +14,7 @@
         Share08Icon,
         BookmarkAdd02Icon,
         BookmarkCheck02Icon,
-    } from "@hugeicons/core-free-icons";
+    } from '$lib/icons';
     import TrackRow from "$lib/components/TrackRow.svelte";
     import TrackFilter, {
         filterTracks,
@@ -261,7 +261,7 @@
                         src={thumb(album.thumbnail, 400)}
                         alt=""
                         style="width:7rem;height:7rem"
-                        class="shrink-0 rounded-xl object-cover shadow-2xl"
+                        class="shrink-0 rounded-xl object-cover shadow-2xl transition-transform duration-300 ease-out hover:scale-105"
                     />
                 {:else}
                     <div

@@ -1,13 +1,13 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { ModeWatcher, mode } from 'mode-watcher';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		CheckmarkCircle02Icon,
 		AlertCircleIcon,
 		InformationCircleIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { getCurrentWindow } from '@tauri-apps/api/window';

@@ -1,7 +1,7 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		ShuffleIcon,
 		Radio02Icon,
@@ -14,7 +14,7 @@
 		BookmarkAdd02Icon,
 		BookmarkCheck02Icon,
 		ArrowRight01Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import MediaCardSkeleton from '$lib/components/MediaCardSkeleton.svelte';
 	import TrackRow from '$lib/components/TrackRow.svelte';
 	import TrackRowSkeleton from '$lib/components/TrackRowSkeleton.svelte';

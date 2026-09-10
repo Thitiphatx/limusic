@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		PreviousIcon,
 		NextIcon,
@@ -15,11 +15,11 @@
 		FavouriteIcon,
 		Add01Icon,
 		InfinityIcon,
-		MinimizeScreenIcon,
+		PictureInPictureIcon,
 		MusicNote01Icon,
 		ArrowUp01Icon,
 		ArrowDown01Icon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';
 	import { Button } from '$lib/components/ui/button';
@@ -138,25 +138,27 @@
 <footer
 	onpointerdown={(e) => (pressedControl = isControl(e.target))}
 	onclick={onBarClick}
-	class="flex items-center gap-2 border-t bg-card px-2 py-2.5 sm:gap-4 sm:px-4 sm:py-3"
+	class="dark flex min-h-[86px] shrink-0 items-center gap-3 border-t border-white/10 !bg-black text-white px-3 py-3 sm:gap-6 sm:px-5"
 >
 	<!-- Now playing. data-ctx: right-clicking the cover or the title opens the ⋮ menu for the track
 	     that's playing (not the buttons beside them — those keep their own meaning). -->
-	<div class="flex min-w-0 flex-1 items-center gap-3" data-ctx>
+	<div class="flex min-w-0 flex-1 items-center gap-3.5" data-ctx>
 		{#key playback.now?.videoId}
 			{#if playback.now?.thumbnail}
-				<img
-					src={thumb(playback.now.thumbnail, 120)}
-					alt=""
-					style="max-width:none"
-					class="h-12 w-12 shrink-0 rounded-lg object-cover"
-					in:fade={{ duration: 250 }}
-				/>
+				<div class="h-14 w-14 shrink-0 overflow-hidden rounded-xl shadow-md">
+					<img
+						src={thumb(playback.now.thumbnail, 120)}
+						alt=""
+						style="max-width:none"
+						class="cover-scale h-full w-full object-cover cursor-pointer"
+						in:fade={{ duration: 250 }}
+					/>
+				</div>
 			{:else}
 				<div
-					class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground/50"
+					class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-muted text-muted-foreground/50"
 				>
-					<HugeiconsIcon icon={MusicNote01Icon} class="h-5 w-5" />
+					<HugeiconsIcon icon={MusicNote01Icon} class="h-6 w-6" />
 				</div>
 			{/if}
 		{/key}
@@ -165,7 +167,7 @@
 				{#snippet title()}
 					<Marquee
 						text={playback.now?.title ?? t('player.not_playing')}
-						class="text-sm font-medium"
+						class="text-[15px] font-semibold tracking-tight"
 					/>
 				{/snippet}
 				<!-- The button wraps the whole marquee rather than the text inside it: mid-scroll the
@@ -258,8 +260,8 @@
 	</div>
 
 	<!-- Transport -->
-	<div class="flex flex-[1.5] flex-col items-center gap-1">
-		<div class="flex items-center gap-1">
+	<div class="flex flex-[1.5] flex-col items-center gap-1.5">
+		<div class="flex items-center gap-1.5">
 			<Button
 				variant="ghost"
 				size="icon-sm"
@@ -272,13 +274,13 @@
 					class="h-4 w-4 {shuffleOn ? 'text-primary' : 'text-muted-foreground'}"
 				/>
 			</Button>
-			<Button variant="ghost" size="icon-sm" onclick={() => api.prevTrack()} aria-label={t('player.previous')}>
+			<Button variant="ghost" size="icon" class="h-9 w-9" onclick={() => api.prevTrack()} aria-label={t('player.previous')}>
 				<HugeiconsIcon icon={PreviousIcon} class="h-5 w-5" />
 			</Button>
 			<Button
 				variant="default"
-				size="icon"
-				class="rounded-full"
+				size="icon-lg"
+				class="size-10 rounded-full !bg-white !text-black shadow-md transition-transform duration-150 hover:!bg-white/90 hover:scale-105 active:scale-95"
 				onclick={() => api.togglePause()}
 				aria-label={playback.paused ? t('player.play') : t('player.pause')}
 			>
@@ -288,10 +290,10 @@
 				icon={PauseIcon}
 				altIcon={PlayIcon}
 				showAlt={playback.paused}
-				class="h-5 w-5"
+				class="h-5.5 w-5.5 !text-black"
 			/>
 			</Button>
-			<Button variant="ghost" size="icon-sm" onclick={() => api.nextTrack()} aria-label={t('player.next')}>
+			<Button variant="ghost" size="icon" class="h-9 w-9" onclick={() => api.nextTrack()} aria-label={t('player.next')}>
 				<HugeiconsIcon icon={NextIcon} class="h-5 w-5" />
 			</Button>
 			<Button
@@ -364,7 +366,7 @@
 		<!-- One cluster, so they sit tighter to each other than to the volume slider. -->
 		<div class="flex items-center gap-0.5">
 			<Button variant="ghost" size="icon-sm" onclick={openMiniPlayer} aria-label={t('player.mini_player')}>
-				<HugeiconsIcon icon={MinimizeScreenIcon} class="h-5 w-5" />
+				<HugeiconsIcon icon={PictureInPictureIcon} class="h-5 w-5" />
 			</Button>
 			<Button
 				variant={lyricsOpen ? 'secondary' : 'ghost'}

@@ -1,12 +1,12 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The "saved" mark on a track row: this song is already in one or more of your own playlists.
 	// Pointing at it names them (three at most, "and N more" for the rest), and each one links
 	// through to that playlist. The popup is `fixed`, anchored at the trigger and moved to <body>
 	// (`toBody`), same as TrackMenu: a track list scrolls, and half of them are paint-contained.
 	// Living at <body> is also why the links need no stopPropagation, despite the whole row being a
 	// play target: nothing in there bubbles through the row any more.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { CheckmarkCircle03Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { CheckmarkCircle03Icon } from '$lib/icons';
 	import type { BrowseItem } from '$lib/api';
 	import { hrefFor } from '$lib/browse';
 	import { anchorMenu, fitMenu, NO_ANCHOR, toBody } from '$lib/menu';

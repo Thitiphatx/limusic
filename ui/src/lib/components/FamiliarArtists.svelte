@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The artists you actually play, ranked by the play counts this machine has been keeping.
 	//
 	// It used to be a text list beside a "flower" of avatars floating in space, and the flower was
@@ -11,8 +11,8 @@
 	// proportion to their plays, which turns the list into a bar chart you read without noticing.
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { UserLove02Icon, UserIcon, UserStar01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { UserLove02Icon, UserIcon, UserStar01Icon } from '$lib/icons';
 	import SectionHeading from './SectionHeading.svelte';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import PlaylistMenu from './PlaylistMenu.svelte';

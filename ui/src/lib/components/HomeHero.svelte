@@ -1,7 +1,7 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { HistoryIcon, Search01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { HistoryIcon, Search01Icon } from '$lib/icons';
 	import SearchSuggest from '$lib/components/SearchSuggest.svelte';
 	import { auth, playback } from '$lib/player.svelte';
 	import { thumb } from '$lib/thumb';

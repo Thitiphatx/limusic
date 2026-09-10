@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The Library page's Songs tab (and, with `uploads`, its Uploads tab): one flat list with a
 	// Shuffle all over the whole thing (issue #73).
 	//
@@ -7,13 +7,13 @@
 	// playlist, so this reads them through `get_playlist` and the Rust side gains nothing.
 	// What pins that: `library_songs_browse_returns_tracks` in crates/innertube/tests/live_smoke.rs.
 	import { onMount } from 'svelte';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		CloudUploadIcon,
 		MusicNote01Icon,
 		PlayIcon,
 		ShuffleIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import TrackFilter, { filterTracks } from './TrackFilter.svelte';
 	import TrackRow from './TrackRow.svelte';

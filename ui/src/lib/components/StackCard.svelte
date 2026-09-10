@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// A playlist is a pile of things, so it's drawn as one: the cover with two sheet edges showing
 	// above it, fanning further out under the pointer. It costs two divs and no extra requests, and
 	// it's the one glance that separates "a playlist" from "an album" in a mixed shelf, which square
@@ -6,8 +6,8 @@
 	//
 	// The sheets are full-size siblings behind an opaque cover, scaled narrower and lifted, so only
 	// their top strips are ever visible. Transform-only, so the fan composites.
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { PlayIcon, MusicNote01Icon, ListRestartIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { PlayIcon, MusicNote01Icon, ListRestartIcon } from '$lib/icons';
 	import { ON_REPEAT_ID } from '$lib/api';
 	import type { BrowseItem } from '$lib/api';
 	import { thumb } from '$lib/thumb';

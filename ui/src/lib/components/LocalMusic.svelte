@@ -1,9 +1,9 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// The Library page's Local tab: music that lives on this machine. Works signed out and offline,
 	// because nothing here goes near YouTube (Rust `local.rs`). Albums open the normal album page
 	// and songs play through the normal queue, so everything past this component is shared.
 	import { onMount } from 'svelte';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import { open } from '@tauri-apps/plugin-dialog';
 	import {
 		Add01Icon,
@@ -12,7 +12,7 @@
 		PlayIcon,
 		RefreshIcon,
 		ShuffleIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import MediaCard from './MediaCard.svelte';

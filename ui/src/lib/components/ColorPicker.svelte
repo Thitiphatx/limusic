@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	// Saturation/value square + hue slider + hex field. Ported down from Kibo UI's React component:
 	// no alpha (a translucent --primary just breaks the theme), no format dropdown (HEX/RGB/HSL is a
 	// dev-facing control), and the hex field is editable here — theirs is read-only, which blocks the
@@ -7,8 +7,8 @@
 	// The square is a pointer target with no keyboard equivalent; the hex field is the accessible
 	// path to any colour, and the hue slider is a real slider (arrow keys work).
 	import { untrack } from 'svelte';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { ColorPickerIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { ColorPickerIcon } from '$lib/icons';
 	import { Slider } from '$lib/components/ui/slider';
 	import { Input } from '$lib/components/ui/input';
 	import { hexToHsv, hsvToHex, type Hsv } from '$lib/color';

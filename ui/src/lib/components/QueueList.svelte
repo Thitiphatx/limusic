@@ -1,9 +1,9 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { onMount, tick } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { HistoryIcon, InfinityIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { HistoryIcon, InfinityIcon } from '$lib/icons';
 	import TrackRow from '$lib/components/TrackRow.svelte';
 	import * as api from '$lib/api';
 	import { queueBlocks, moveTarget, type QueueRow } from '$lib/queue';

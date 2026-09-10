@@ -1,8 +1,8 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { fade, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Cancel01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { Cancel01Icon } from '$lib/icons';
 	import * as api from '$lib/api';
 	import type { BrowseItem } from '$lib/api';
 	import { t } from '$lib/i18n.svelte';

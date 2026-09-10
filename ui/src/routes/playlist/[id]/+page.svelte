@@ -2,7 +2,7 @@
 	import { untrack } from 'svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { HugeiconsIcon } from '$lib/icons';
 	import {
 		PlayIcon,
 		ShuffleIcon,
@@ -20,7 +20,7 @@
 		ListRestartIcon,
 		Sorting01Icon,
 		ArrowUpDownIcon
-	} from '@hugeicons/core-free-icons';
+	} from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import { Skeleton } from '$lib/components/ui/skeleton';
@@ -783,7 +783,7 @@
 						<HugeiconsIcon icon={ListRestartIcon} class="h-20 w-20" />
 					</div>
 				{:else if art}
-					<img src={art} alt="" class="relative h-40 w-40 rounded-xl object-cover shadow-lg" />
+					<img src={art} alt="" class="relative h-40 w-40 rounded-xl object-cover shadow-lg transition-transform duration-300 ease-out hover:scale-105" />
 				{:else}
 					<div class="relative h-40 w-40 rounded-xl bg-muted"></div>
 				{/if}

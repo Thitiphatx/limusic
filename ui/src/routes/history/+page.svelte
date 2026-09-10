@@ -5,8 +5,7 @@
 	// each bucket keeps a sticky heading with its own count and the rows sit under it as ordinary
 	// TrackRows. One queue is built from every bucket at once, so Play all runs the whole history.
 	import { onMount } from 'svelte';
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { HistoryIcon, PlayIcon, ShuffleIcon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon, HistoryIcon, PlayIcon, ShuffleIcon } from '$lib/icons';
 	import { Button } from '$lib/components/ui/button';
 	import TrackFilter, { filterTracks } from '$lib/components/TrackFilter.svelte';
 	import TrackRow from '$lib/components/TrackRow.svelte';

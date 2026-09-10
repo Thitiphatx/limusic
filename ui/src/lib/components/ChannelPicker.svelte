@@ -1,6 +1,6 @@
-<script lang="ts">
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { CheckmarkCircle02Icon, UserCircleIcon } from '@hugeicons/core-free-icons';
+﻿<script lang="ts">
+	import { HugeiconsIcon } from '$lib/icons';
+	import { CheckmarkCircle02Icon, UserCircleIcon } from '$lib/icons';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button';
 	import * as api from '$lib/api';

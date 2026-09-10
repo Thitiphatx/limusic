@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 	Filter box for a track list (playlist / album header).
 
 	Purely client-side, over the rows already loaded. A long playlist arrives a page at a time, so
@@ -21,8 +21,8 @@
 </script>
 
 <script lang="ts">
-	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { SearchList01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon } from '$lib/icons';
+	import { SearchList01Icon, Cancel01Icon } from '$lib/icons';
 	import { t } from '$lib/i18n.svelte';
 
 	let {
